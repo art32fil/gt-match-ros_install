@@ -1,0 +1,31 @@
+<package>
+  <description brief="groundtruth">
+
+    A tool to automatically ground truth PR2 logfiles inparticular logs taken in MIT Stata Center.
+
+  </description>
+  <author>Maurice Fallon</author>
+  <license>No license</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/groundtruth</url>
+  <depend package="std_msgs"/>
+  <depend package="nav_msgs"/>
+  <depend package="tf"/>
+  <depend package="message_filters"/>
+<!--  <depend package="image_transport"/> -->
+<!--  <depend package="image_geometry"/> -->
+<!--  <depend package="cv_bridge"/> -->
+  <depend package="cv_bridge"/>
+  <depend package="sensor_msgs"/>
+<!--  <depend package="eigen"/> -->
+<!--  <depend package="opencv2"/> -->
+<!--  <depend package="camera_info_manager"/> -->
+  <!--<depend package="pr2_mechanism_controllers"/> -->
+  <depend package="rosbag"/>
+  <build_depend>rosbag</build_depend>
+  <build_depend>opencv3</build_depend>
+  <run_depend>rosbag</run_depend>
+  <run_depend>opencv3</run_depend>
+</package>
+
+

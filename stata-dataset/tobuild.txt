@@ -1,0 +1,17 @@
+# list of subdirectories to build, one one each line.  Empty lines
+# and lines starting with '#' are ignored
+
+concise-args
+libbot-read-only
+Eigen_pod
+
+# Not included in the repository as yet:
+isam_pod
+scanmatch
+
+visualization
+libfloorplan
+groundtruth
+
+#fovis
+#ros_fovis

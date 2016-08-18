@@ -1,0 +1,51 @@
+нам понадобятся такие предустановленные штуки
+svn, git, (библиотеки для lcm) (библиотеки для CHOLMOD-а)
+  $ sudo apt-get install subversion git build-essential libglib2.0-dev python-dev liblapack3 libblas3
+
+lcm:
+  качаем с верхней ссылки на сайте https://lcm-proj.github.io/build_instructions.html
+  (не клонируем git, а качаем архив) потом
+    $ unzip lcm-X.Y.Z.zip
+    $ cd lcm-X.Y.Z
+    $ ./configure
+    $ make
+    $ sudo make install
+    $ sudo ldconfig
+
+openCV:
+  $ git clone https://github.com/jayrambhia/Install-OpenCV.git
+  $ cd Install-OpenCV/Ubuntu
+  $ chmod +x * 
+  $ ./opencv_latest.sh
+
+SuiteSparse:
+  $ git clone https://github.com/PetterS/SuiteSparse.git
+  $ make
+
+ROS:
+  http://wiki.ros.org/kinetic/Installation/Ubuntu (или не kinetic версию, смотрите сами):
+  $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+  $ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 0xB01FA116
+  $ sudo apt-get update
+  $ sudo apt-get install ros-kinetic-desktop-full
+  $ sudo rosdep init
+  $ rosdep update
+  $ echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+  $ source ~/.bashrc
+
+Наконец, stata-dataset
+  $ svn co https://svn.csail.mit.edu/stata-dataset (нажать "p")
+  $ cd stata-dataset
+  $ svn co https://svn.csail.mit.edu/scanmatch/trunk scanmatch
+  $ svn co https://svn.csail.mit.edu/isam isam_pod
+И в ~/.bashrc в конец добавить
+source /opt/ros/<версия ros jade|kinetic|...>/setup.bash   # должно быть по умолчанию, если вы установили ros
+export ROS_ROOT=/opt/ros/<версия ros>/share/ros
+export PATH=$ROS_ROOT/bin:$PATH
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:<путь до graundtruth. ex: ~/stata-dataset/groundtruth>:/opt/ros/<версия ros>/share
+alias cdgroundtruth='cd <путь до graundtruth. ex: $HOME/stata-dataset/groundtruth>'
+PATH=$PATH:<путь до graundtruth. ex: $HOME/stata-dataset/groundtruth>/build/bin
+
+после этого копируем с подтвержданием замены иерархию папок, которая лежит рядом
+
+и потом make в stata-dataset
