@@ -24,7 +24,7 @@ function(find_dir_full dir is_found)
 endfunction()
 
 #########################################################################
-if(NOT DEFINED CHOLMODINSUITESPARSE_INCLUDES && NOT DEFINED CHOLMODINSUITESPARSE_LIBRARIES)
+if(NOT DEFINED CHOLMODINSUITESPARSE_INCLUDES AND NOT DEFINED CHOLMODINSUITESPARSE_LIBRARIES)
   if(NOT suitesparse_dir)
     message("\nPath to SuiteSparse is not set. Please type:")
     message("$ make SUITESPARSE_DIR=<path to SuiteSparse>")
