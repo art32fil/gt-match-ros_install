@@ -49,3 +49,8 @@ PATH=$PATH:<путь до graundtruth. ex: $HOME/stata-dataset/groundtruth>/buil
 после этого копируем с подтвержданием замены иерархию папок, которая лежит рядом
 
 и потом make в stata-dataset
+ $ make
+опционально:
+ вы моежете указать, куда конкретно вы скачали SuiteSparse (это ускорит время его поиска)
+ ex:
+   $make suitesparse_dir=~/git/SuiteSparse
