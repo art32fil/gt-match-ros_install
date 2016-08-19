@@ -28,7 +28,7 @@ build:
 
 # internal target: populate the build directory
 build/Makefile:
-	cd build && cmake -DSUITESPARSE_DIR=${SUITESPARSE_DIR} ..
+	cd build && cmake -Dsuitesparse_dir=${suitesparse_dir} ..
 
 
 # create all executables in the examples/ directory

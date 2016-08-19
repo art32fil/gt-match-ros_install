@@ -24,33 +24,39 @@ function(find_dir_full dir is_found)
 endfunction()
 
 #########################################################################
-if(NOT suitesparse_dir)
-  message("\nPath to SuiteSparse is not set. Please type:")
-  message("$ make SUITESPARSE_DIR=<path to SuiteSparse>")
-  message("  ex make SUITESPARSE_DIR=home/user/SuiteSparse\n")
-  message("try to find SuiteSparse by own...")
-  find_dir()
-  set(suitesparse_dir ${dir_path})
-endif()
-if(suitesparse_dir)
-  #file(GLOB children ${SUITESPARSE_DIR}/*)
-  list(APPEND children ${suitesparse_dir}/CHOLMOD
-                       ${suitesparse_dir}/CSparse
-                       ${suitesparse_dir}/SuiteSparse_config
-                       ${suitesparse_dir}/COLAMD
-                       ${suitesparse_dir}/AMD
-                       ${suitesparse_dir}/UFMPACK)
-  foreach(child ${children})
-    if(IS_DIRECTORY ${child})
-      list(APPEND CHOLMODINSUITESPARSE_INCLUDES ${child} ${child}/Include)
-      file(GLOB_RECURSE lib_in_dir ${child}/*.a)
-      list(APPEND CHOLMODINSUITESPARSE_LIBRARIES ${lib_in_dir})
-    endif()
-  endforeach()
-  # link liblapack.a and libblas.a from /user/lib
-  # NOTE: if you don't have this libraries in /user/lib, you should download it
-  # $ sudo apt-get install liblapack3
-  # $ sudo apt-get install libblas3
-  list(APPEND CHOLMODINSUITESPARSE_LIBRARIES lapack blas)
+if(NOT DEFINED CHOLMODINSUITESPARSE_INCLUDES && NOT DEFINED CHOLMODINSUITESPARSE_LIBRARIES)
+  if(NOT suitesparse_dir)
+    message("\nPath to SuiteSparse is not set. Please type:")
+    message("$ make SUITESPARSE_DIR=<path to SuiteSparse>")
+    message("  ex make SUITESPARSE_DIR=home/user/SuiteSparse\n")
+    message("try to find SuiteSparse by own...")
+    find_dir()
+    set(suitesparse_dir ${dir_path})
+  else()
+    message("SuiteSparse located directory is set to ${suitesparse_dir}")
+  endif()
+  if(suitesparse_dir)
+    #file(GLOB children ${SUITESPARSE_DIR}/*)
+    list(APPEND children ${suitesparse_dir}/CHOLMOD
+                         ${suitesparse_dir}/CSparse
+                         ${suitesparse_dir}/SuiteSparse_config
+                         ${suitesparse_dir}/COLAMD
+                         ${suitesparse_dir}/AMD
+                         ${suitesparse_dir}/UFMPACK)
+    foreach(child ${children})
+      if(IS_DIRECTORY ${child})
+        list(APPEND CHOLMODINSUITESPARSE_INCLUDES ${child} ${child}/Include)
+        file(GLOB_RECURSE lib_in_dir ${child}/*.a)
+        list(APPEND CHOLMODINSUITESPARSE_LIBRARIES ${lib_in_dir})
+      endif()
+    endforeach()
+    # link liblapack.a and libblas.a from /user/lib
+    # NOTE: if you don't have this libraries in /user/lib, you should download it
+    # $ sudo apt-get install liblapack3
+    # $ sudo apt-get install libblas3
+    list(APPEND CHOLMODINSUITESPARSE_LIBRARIES lapack blas)
+  endif()
+else()
+  message("CHOLMODINSUITESPARSE_INCLUDES and CHOLMODINSUITESPARSE_LIBRARIES was already defined")
 endif()
 #########################################################################
