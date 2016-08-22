@@ -1,12 +1,12 @@
-нам понадобятся такие предустановленные штуки
-svn, git, (библиотеки для lcm) (библиотеки для CHOLMOD-а)
+you need next packages to be downloaded:
+svn, git, (libraries for lcm) (libraries for CHOLMOD-а)
   $ sudo apt-get install subversion git build-essential libglib2.0-dev python-dev liblapack3 libblas3
 
 lcm:
-  качаем с верхней ссылки на сайте 
+  download fit from the first link in the top of a site
   https://lcm-proj.github.io/build_instructions.html
-  (не клонируем git, а качаем архив)
-  потом
+  (you shold not clone git, it will be better to download an archive)
+  then
     $ unzip lcm-X.Y.Z.zip
     $ cd lcm-X.Y.Z
     $ ./configure
@@ -26,7 +26,7 @@ SuiteSparse:
   $ make
 
 ROS:
-  http://wiki.ros.org/kinetic/Installation/Ubuntu (для kinetic):
+  http://wiki.ros.org/kinetic/Installation/Ubuntu (for kinetic):
   $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
   $ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 0xB01FA116
   $ sudo apt-get update
@@ -36,24 +36,24 @@ ROS:
   $ echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
   $ source ~/.bashrc
 
-Наконец, stata-dataset
+Finally, stata-dataset
   $ svn co https://svn.csail.mit.edu/stata-dataset
-на возможный вопрос нажать "p"
+press "p" if there will be a question
   $ cd stata-dataset
   $ svn co https://svn.csail.mit.edu/scanmatch/trunk scanmatch
   $ svn co https://svn.csail.mit.edu/isam isam_pod
 
-И в ~/.bashrc в конец добавить
+Put the next lines in the end of ~/.bashrc
 ################################################################################
-source /opt/ros/<__версия_ros__>/setup.bash   # должно быть, если установлен ros
-export ROS_ROOT=/opt/ros/<__версия_ros__>/share/ros
+source /opt/ros/<__ros_version__>/setup.bash         # it is if ROS is installed
+export ROS_ROOT=/opt/ros/<__ros_version__>/share/ros
 export PATH=$ROS_ROOT/bin:$PATH
-export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:<__путь_до_graundtruth__>:
-                                          /opt/ros/<__версия_ros__>/share
-alias cdgroundtruth='cd <__путь_до_graundtruth__>'
-PATH=$PATH:<__путь_до_graundtruth__>/build/bin
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:<__path_to_graundtruth__>:
+                                          /opt/ros/<__ros_version__>/share
+alias cdgroundtruth='cd <__path_to_graundtruth__>'
+PATH=$PATH:<__path_to_graundtruth__>/build/bin
 ################################################################################
-например:
+example:
 source /opt/ros/kinetic/setup.bash
 export ROS_ROOT=/opt/ros/kinetic/share/ros
 export PATH=$ROS_ROOT/bin:$PATH
@@ -62,19 +62,18 @@ alias cdgroundtruth='cd $HOME/stata-dataset/groundtruth'
 PATH=$PATH:<$HOME/stata-dataset/groundtruth/build/bin
 ################################################################################
 
-после этого совершаем слияние папки stata-dataset,
-скачанной вами ранее и скачанной вместе с этим туториалом
-
-и потом make в stata-dataset
+after that merge folders stata-dataset,
+which dowloaded with this tutorial with one clonned using svn from MIT
+and then run make in stata-dataset
  $ make
-опционально:
- вы моежете указать, куда конкретно вы скачали SuiteSparse
- (это ускорит время его поиска)
+advanced:
+ you could put a path to SuiteSparse
+ (it will reduce time spent on finding it by itself)
  ex:
    $make suitesparse_dir=~/git/SuiteSparse
 
 ________________________________________________________________________________
-что конкретно было измемено:
+what was exactly changed:
 stata-dataset
  ┣━━━━━━tobuild.txt
  ┃      ┌─────────┬────────────────────────────────────────────────────────────┐
