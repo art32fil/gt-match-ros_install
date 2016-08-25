@@ -61,9 +61,12 @@ export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/stata-dataset/groundtruth:/opt/ros/k
 alias cdgroundtruth='cd $HOME/stata-dataset/groundtruth'
 PATH=$PATH:<$HOME/stata-dataset/groundtruth/build/bin
 ################################################################################
+!IMPORTANT! After the ~/.bashrc file was updated it is need to reopen terminal
+windows to make the chandes applied.
 
-after that merge folders stata-dataset,
-which dowloaded with this tutorial with one clonned using svn from MIT
+then (in the directory where stata-dataset locates as subdirectory)
+patch -p0 <[path to downloaded git tutorial]/gt-match-ros_tutorial/patch
+
 and then run make in stata-dataset
  $ make
 advanced:
